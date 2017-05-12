@@ -20,11 +20,32 @@ const getElementById = function(root, id) {
 };
 
 const getElementsByClassName = function(root, className) {
-  // Your code here
+  var flatNodes = flattenTreeToArray(root);
+  flatNodes = _.reject(flatNodes, (node) => node.nodeType === 3);
+  //console.log(flatNodes);
+  flatNodes = _.filter(flatNodes, (node) => {
+    let attributes = node.attributes;
+    return _.some(attributes, (attribute) => attribute.value === className);
+  });
+  return flatNodes;
+  
+  /*_.each(flatNodes, (node) => {
+    let attributes = node.attributes;
+    console.log("----", node, attributes, "----");
+    _.each(attributes, (attribute) => {
+      //console.log(attribute.name);
+      console.log(attribute.value);
+    });
+  });*/
+  //console.log(flatNodes);
+
+/*  flatNodes = _.filter(flatNodes, (node) => node.class === className);
+  console.log(flatNodes);
+  return flatNodes;*/
 };
 
 const getElementsByTagName = function(root, tagName) {
-  // Your code here
+  var flatNodes = flattenTreeToArray(root);
 };
 
 module.exports = {
