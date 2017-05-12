@@ -20,13 +20,11 @@ const visitAllNodes = function(node, callback) {
 
 
 const flattenTreeToArray = function(parentNode) {
-//  const result = [];
-//  visitAllNodes(parentNode, (node) => {
-//    console.log(node);
-//    console.log(node.childNodes);
-//    result.push(node);
-//  });
-//  return result;
+  const result = [];
+  visitAllNodes(parentNode, (node) => {
+    result.push(node);
+  });
+  return result;
 };
 
 module.exports = {
