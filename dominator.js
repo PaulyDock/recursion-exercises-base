@@ -25,7 +25,7 @@ const getElementsByClassName = function(root, className) {
   //console.log(flatNodes);
   flatNodes = _.filter(flatNodes, (node) => {
     let attributes = node.attributes;
-    return _.some(attributes, (attribute) => attribute.value === className);
+    return _.some(attributes, (attribute) => _.indexOf(attribute.value.split(' '), className) > -1);
   });
   return flatNodes;
   
@@ -46,6 +46,9 @@ const getElementsByClassName = function(root, className) {
 
 const getElementsByTagName = function(root, tagName) {
   var flatNodes = flattenTreeToArray(root);
+  flatNodes = _.reject(flatNodes, (node) => node.nodeType === 3);
+  flatNodes = _.filter(flatNodes, (node) => node.tagName === tagName);
+  return flatNodes;
 };
 
 module.exports = {
